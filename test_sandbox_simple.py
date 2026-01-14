@@ -4,13 +4,14 @@ Simple sandbox test that creates a sandbox, displays info, waits 60 seconds, the
 """
 
 import asyncio
+import json
 import os
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-from computesdk import compute, auto_config
+from computesdk import compute, auto_config, CreateSandboxOptions
 
 
 async def main():
@@ -29,7 +30,12 @@ async def main():
         return
 
     print("\nCreating sandbox...")
-    sandbox = await compute.sandbox.create()
+    sandbox = await compute.sandbox.create(
+        CreateSandboxOptions(
+            name="test-sandbox-2",
+            namespace="development",
+        )
+    )
 
     print("\n" + "=" * 50)
     print("SUCCESS: Sandbox created!")
@@ -103,6 +109,36 @@ print("Hello from the sandbox!")
     print(f"   Found {len(entries)} entries:")
     for entry in entries:
         print(f"     - {entry.name} (type: {entry.type})")
+
+    # Test get_url
+    print("\n" + "=" * 50)
+    print("URL TESTS")
+    print("=" * 50)
+
+    print("\n1. Getting URL for port 3000...")
+    url = await sandbox.get_url(port=3000)
+    print(f"   URL: {url}")
+
+    print("\n2. Getting URL for port 8080 with https...")
+    url_https = await sandbox.get_url(port=8080, protocol="https")
+    print(f"   URL: {url_https}")
+
+    print("\n" + "=" * 50)
+    print("INFO TESTS")
+    print("=" * 50)
+
+    # Test get_info
+    print("\n3. Getting sandbox info...")
+    info = await sandbox.get_info()
+    info_dict = {
+        "sandbox_id": info.id,
+        "status": info.status.value,
+        "timeout": info.timeout,
+        "provider": info.provider,
+        "name": info.name,
+        "namespace": info.namespace,
+    }
+    print(f"   Info:\n{json.dumps(info_dict, indent=4)}")
 
     print("\n" + "=" * 50)
     print("All tests completed!")
