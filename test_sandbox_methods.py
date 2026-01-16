@@ -20,6 +20,7 @@ async def main():
     print(f"  COMPUTESDK_API_KEY: {'set' if os.environ.get('COMPUTESDK_API_KEY') else 'NOT SET'}")
     print(f"  COMPUTESDK_GATEWAY_URL: {os.environ.get('COMPUTESDK_GATEWAY_URL', 'default')}")
     print(f"  E2B_API_KEY: {'set' if os.environ.get('E2B_API_KEY') else 'NOT SET'}")
+    print(f"  RAILWAY_API_KEY: {'set' if os.environ.get('RAILWAY_API_KEY') else 'NOT SET'}")
 
     try:
         config = auto_config()
@@ -32,7 +33,7 @@ async def main():
     print("\nCreating sandbox...")
     sandbox = await compute.sandbox.create(
         CreateSandboxOptions(
-            name="test-sandbox-2",
+            name="test-sandbox-7",
             namespace="development",
         )
     )
@@ -58,12 +59,18 @@ async def main():
     # Test run_command
     print("\nRunning command: ls -la /")
     cmd_result = await sandbox.run_command("ls -la /")
-    print(f"  Exit code: {cmd_result.exit_code}")
-    print(f"  Duration:  {cmd_result.duration_ms}ms")
+    # print(f"  Exit code: {cmd_result.exit_code}")
+    # print(f"  Duration:  {cmd_result.duration_ms}ms")
     print(f"  Output:\n{cmd_result.stdout}")
     if cmd_result.stderr:
         print(f"  Stderr: {cmd_result.stderr}")
-
+    print(f"  Exit code: {cmd_result.exit_code}")
+    print(f"  Duration:  {cmd_result.duration_ms}ms")
+    
+    # Test run_code
+    print("\n" + "=" * 50)
+    print("TEST RUN_CODE")
+    print("=" * 50)
     # Test run_code
     print("\nRunning Python code:")
     code = """
@@ -144,8 +151,8 @@ print("Hello from the sandbox!")
     print("All tests completed!")
     print("=" * 50)
 
-    print("\nWaiting 60 seconds...")
-    await asyncio.sleep(60)
+    print("\nWaiting 30 seconds...")
+    await asyncio.sleep(30)
 
     print("\nDestroying sandbox...")
     await sandbox.destroy()
