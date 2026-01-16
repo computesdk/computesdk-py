@@ -7,7 +7,7 @@ ComputeSDK provides a unified interface for executing code, running commands, an
 ## Installation
 
 ```bash
-pip install computesdk
+pip install git+https://github.com/computesdk/computesdk-py.git
 ```
 
 ## Quick Start
@@ -174,7 +174,7 @@ terminals = await sandbox.list_terminals()
 await sandbox.destroy_terminal(terminal.id)
 ```
 
-### Server Management
+### WIP - Server Management
 
 ```python
 from computesdk import StartServerOptions
@@ -218,7 +218,7 @@ watcher = await sandbox.create_watcher(
 await sandbox.destroy_watcher(watcher.id)
 ```
 
-### Session Tokens
+### WIP - Session Tokens
 
 ```python
 from computesdk import CreateSessionTokenOptions
@@ -311,7 +311,7 @@ except ComputeSDKError as e:
 | `destroy_terminal(id)` | Destroy a terminal |
 | `execute_in_terminal(id, cmd)` | Execute command in terminal |
 
-### Server Methods
+### WIP Server Methods
 
 | Method | Description |
 |--------|-------------|
