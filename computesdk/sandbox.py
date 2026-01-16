@@ -717,7 +717,7 @@ class Sandbox:
 
         return ServerInfo(
             slug=data.get("slug", options.slug),
-            command=data.get("command", options.command),
+            command=data.get("start", options.command),
             status=data.get("status", "running"),
             path=data.get("path"),
             port=data.get("port"),
@@ -741,7 +741,7 @@ class Sandbox:
         return [
             ServerInfo(
                 slug=s["slug"],
-                command=s["command"],
+                command=s["start"],
                 status=s.get("status", "running"),
                 path=s.get("path"),
                 port=s.get("port"),
@@ -766,7 +766,7 @@ class Sandbox:
 
         return ServerInfo(
             slug=data["slug"],
-            command=data["command"],
+            command=data["start"],
             status=data.get("status", "running"),
             path=data.get("path"),
             port=data.get("port"),
