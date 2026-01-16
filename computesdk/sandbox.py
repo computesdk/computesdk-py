@@ -701,7 +701,7 @@ class Sandbox:
         """
         body: Dict[str, Any] = {
             "slug": options.slug,
-            "command": options.command,
+            "start": options.command,
         }
 
         if options.path is not None:
