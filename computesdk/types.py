@@ -178,7 +178,7 @@ class ServerInfo:
     """Server process information."""
 
     slug: str
-    command: str
+    start: str
     status: str
     path: Optional[str] = None
     port: Optional[int] = None
