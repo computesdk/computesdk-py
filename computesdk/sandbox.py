@@ -694,7 +694,7 @@ class Sandbox:
         Example:
             server = await sandbox.start_server(StartServerOptions(
                 slug="api",
-                command="node server.js",
+                start="node server.js",
                 path="/app",
             ))
             print(f"Server running at: {server.url}")
@@ -717,7 +717,7 @@ class Sandbox:
 
         return ServerInfo(
             slug=data.get("slug", options.slug),
-            command=data.get("start", options.command),
+            start=data.get("start", options.command),
             status=data.get("status", "running"),
             path=data.get("path"),
             port=data.get("port"),
@@ -741,7 +741,7 @@ class Sandbox:
         return [
             ServerInfo(
                 slug=s["slug"],
-                command=s["start"],
+                start=s["start"],
                 status=s.get("status", "running"),
                 path=s.get("path"),
                 port=s.get("port"),
@@ -766,7 +766,7 @@ class Sandbox:
 
         return ServerInfo(
             slug=data["slug"],
-            command=data["start"],
+            start=data["start"],
             status=data.get("status", "running"),
             path=data.get("path"),
             port=data.get("port"),
