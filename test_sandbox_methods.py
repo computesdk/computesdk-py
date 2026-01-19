@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from computesdk import compute, auto_config, CreateSandboxOptions
+from computesdk import compute, auto_config, CreateSandboxOptions, CreateTerminalOptions
 
 
 async def main():
@@ -33,7 +33,7 @@ async def main():
     print("\nCreating sandbox...")
     sandbox = await compute.sandbox.create(
         CreateSandboxOptions(
-            name="test-sandbox-7",
+            name="test-sandbox-8",
             namespace="development",
         )
     )
@@ -146,6 +146,37 @@ print("Hello from the sandbox!")
         "namespace": info.namespace,
     }
     print(f"   Info:\n{json.dumps(info_dict, indent=4)}")
+
+
+    print("=== Terminal Sessions ===\n")
+
+    # Create a terminal
+    print("Creating terminal...")
+    terminal = await sandbox.create_terminal(
+        CreateTerminalOptions(shell="/bin/bash", pty=True)
+    )
+    print(f"✓ Terminal created: {terminal.id}")
+
+    # List terminals
+    print("\nListing terminals...")
+    terminals = await sandbox.list_terminals()
+    print(f"✓ Found {len(terminals)} terminal(s)")
+    for t in terminals:
+        print(f"  - {t.id}")
+
+    # Execute command in terminal
+    print("\nExecuting command in terminal...")
+    result = await sandbox.execute_in_terminal(
+        terminal.id,
+        "echo 'Hello from terminal!'",
+        background=False
+    )
+    print(f"✓ Result: {result}")
+
+    # Destroy terminal
+    print("\nDestroying terminal...")
+    await sandbox.destroy_terminal(terminal.id)
+    print("✓ Terminal destroyed")
 
     print("\n" + "=" * 50)
     print("All tests completed!")

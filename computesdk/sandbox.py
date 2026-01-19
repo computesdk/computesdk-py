@@ -478,7 +478,16 @@ class Sandbox:
         """
         response = await self._client.get("/terminals")
 
-        data = response.get("data", response) if isinstance(response, dict) else response
+        # Handle various response structures
+        data = response
+        if isinstance(response, dict):
+            # Try data.terminals first, then data array, then response.terminals
+            if "data" in response:
+                data = response["data"]
+                if isinstance(data, dict) and "terminals" in data:
+                    data = data["terminals"]
+            elif "terminals" in response:
+                data = response["terminals"]
 
         if not isinstance(data, list):
             data = []
@@ -628,7 +637,16 @@ class Sandbox:
         """
         response = await self._client.get("/watchers")
 
-        data = response.get("data", response) if isinstance(response, dict) else response
+        # Handle various response structures
+        data = response
+        if isinstance(response, dict):
+            # Try data.watchers first, then data array, then response.watchers
+            if "data" in response:
+                data = response["data"]
+                if isinstance(data, dict) and "watchers" in data:
+                    data = data["watchers"]
+            elif "watchers" in response:
+                data = response["watchers"]
 
         if not isinstance(data, list):
             data = []
@@ -733,7 +751,16 @@ class Sandbox:
         """
         response = await self._client.get("/servers")
 
-        data = response.get("data", response) if isinstance(response, dict) else response
+        # Handle various response structures
+        data = response
+        if isinstance(response, dict):
+            # Try data.servers first, then data array, then response.servers
+            if "data" in response:
+                data = response["data"]
+                if isinstance(data, dict) and "servers" in data:
+                    data = data["servers"]
+            elif "servers" in response:
+                data = response["servers"]
 
         if not isinstance(data, list):
             data = []
@@ -899,7 +926,16 @@ class Sandbox:
         """
         response = await self._client.get("/auth/session_tokens")
 
-        data = response.get("data", response) if isinstance(response, dict) else response
+        # Handle various response structures
+        data = response
+        if isinstance(response, dict):
+            # Try data.tokens first, then data array, then response.tokens
+            if "data" in response:
+                data = response["data"]
+                if isinstance(data, dict) and "tokens" in data:
+                    data = data["tokens"]
+            elif "tokens" in response:
+                data = response["tokens"]
 
         if not isinstance(data, list):
             data = []
@@ -1081,7 +1117,18 @@ class Sandbox:
             List of child sandbox information.
         """
         response = await self._client.get("/sandboxes")
-        data = response.get("data", response) if isinstance(response, dict) else response
+
+        # Handle various response structures
+        data = response
+        if isinstance(response, dict):
+            # Try data.sandboxes first, then data array, then response.sandboxes
+            if "data" in response:
+                data = response["data"]
+                if isinstance(data, dict) and "sandboxes" in data:
+                    data = data["sandboxes"]
+            elif "sandboxes" in response:
+                data = response["sandboxes"]
+
         return data if isinstance(data, list) else []
 
     async def get_child_sandbox(self, subdomain: str) -> Dict[str, Any]:
