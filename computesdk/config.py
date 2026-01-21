@@ -137,6 +137,7 @@ def get_provider_headers(provider: str) -> Dict[str, str]:
         },
         "render": {
             "X-Render-API-Key": os.environ.get("RENDER_API_KEY", ""),
+            "X-Render-Owner-ID": os.environ.get("RENDER_OWNER_ID", ""),
         },
         "namespace": {
             "X-Namespace-API-Key": os.environ.get("NAMESPACE_API_KEY", ""),

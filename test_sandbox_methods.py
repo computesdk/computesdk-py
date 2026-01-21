@@ -21,6 +21,7 @@ async def main():
     print(f"  COMPUTESDK_GATEWAY_URL: {os.environ.get('COMPUTESDK_GATEWAY_URL', 'default')}")
     print(f"  E2B_API_KEY: {'set' if os.environ.get('E2B_API_KEY') else 'NOT SET'}")
     print(f"  RAILWAY_API_KEY: {'set' if os.environ.get('RAILWAY_API_KEY') else 'NOT SET'}")
+    print(f"  RENDER_API_KEY: {'set' if os.environ.get('RENDER_API_KEY') else 'NOT SET'}")
 
     try:
         config = auto_config()
