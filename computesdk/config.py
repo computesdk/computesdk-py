@@ -44,7 +44,7 @@ PROVIDER_ENV_REQUIREMENTS: Dict[str, List[str]] = {
     "blaxel": ["BL_API_KEY", "BL_WORKSPACE"],
     "fly": ["FLY_API_TOKEN"],
     "render": ["RENDER_API_KEY"],
-    "namespace": ["NAMESPACE_API_KEY"],
+    "namespace": ["NSC_TOKEN"],
     "lambda": ["LAMBDA_API_KEY"],
     "docker": [],  # No API key needed for local Docker
     "aws-ecs": ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"],
@@ -140,7 +140,7 @@ def get_provider_headers(provider: str) -> Dict[str, str]:
             "X-Render-Owner-ID": os.environ.get("RENDER_OWNER_ID", ""),
         },
         "namespace": {
-            "X-Namespace-API-Key": os.environ.get("NAMESPACE_API_KEY", ""),
+            "X-Namespace-Token": os.environ.get("NSC_TOKEN", ""),
         },
         "lambda": {
             "X-Lambda-API-Key": os.environ.get("LAMBDA_API_KEY", ""),
