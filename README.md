@@ -7,7 +7,7 @@ ComputeSDK provides a unified interface for executing code, running commands, an
 ## Installation
 
 ```bash
-pip install git+https://github.com/computesdk/computesdk-py.git
+pip install computesdk
 ```
 
 ## Quick Start

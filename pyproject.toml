@@ -4,10 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "computesdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "A unified SDK for running code in remote sandboxes"
 readme = "README.md"
 license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 authors = [
     { name = "ComputeSDK Team" }
@@ -39,6 +40,11 @@ dev = [
     "mypy>=1.8",
     "ruff>=0.2",
     "python-dotenv>=1.0",
+]
+
+publish = [
+    "build>=1.0",
+    "twine>=5.0",
 ]
 
 [project.urls]
